@@ -1,3 +1,39 @@
+data Pokemon = (Pok tipo Int)
+
+data Entrenador Ent nom pok1 pok2
+
+superaA :: Pokemon -> Pokemon -> Bool
+superaA pok1 pok2 = leGana (tipo pok 1) (tipo pok2)
+
+tipo :: Pokemon -> TipoDePokemon
+tipo (Pok t n) = t
+
+leGana :: TipoDePokemon -> TipoDePokemon -> Bool
+leGana Agua Fuego = True
+leGana Planta Agua = True
+leGana Fuego Planta = True
+leGana _ _ = False 
+
+----------------------------------------------------------
+
+cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
+cantidadDePokemonDe t (Ent n pok1 pok2) = unoSiCeroSino esDelMismoTipoDePokemon t tipo(pok1) + unoSiCeroSino esDelMismoTipoDePokemon t tipo(pok2)
+
+esDelMismoTipoDePokemon :: TipoDePokemon -> TipoDePokemon -> Bool
+esDelMismoTipoDePokemon Fuego Fuego = True
+esDelMismoTipoDePokemon Planta Planta = True
+esDelMismoTipoDePokemon Agua Agua = True
+esDelMismoTipoDePokemon _ _ = False
+
+-----------------------------------------------------
+
+
+
+aplanar :: [[a]] -> [a]
+aplanar [] = []
+aplanar (xs:xss) = xs ++ aplanar xss
+
+
 sucesor :: Int -> Int
 sucesor n -> n+1
 
