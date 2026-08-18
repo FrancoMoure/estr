@@ -298,3 +298,332 @@ sinLosPrimeros n (x:xs) =  sinLosPrimeros n xs
 tpi-est-so listas.unq.edu.ar
 doc
 discord.gg/MQN3rYKJ66
+
+
+
+
+
+sucesor :: Int -> Int
+sucesor x = x+1
+
+sumar :: Int -> Int -> Int
+sumar a b = a+b
+
+divisionYResto :: Int -> Int -> (Int, Int)
+--prec: "m no puede ser 0"
+divisionYResto n m = (div n m, mod n m)
+
+maxDelPar :: (Int, Int) -> Int
+maxDelPar (a,b) = if a>b 
+			then a 
+			else b
+
+data Dir = Norte | Sur | Este | Oeste
+
+opuesto :: Dir -> Dir
+opuesto Norte = Sur
+opuesto Sur = Norte
+opuesto Este = Oeste
+opuesto Oeste = Este
+
+iguales :: Dir -> Dir -> Bool
+iguales Norte Norte = True
+iguales Sur Sur = True
+iguales Oeste Oeste = True
+iguales Este Este = True
+iguales _ _ = False 
+
+siguiente :: Dir -> Dir
+siguiente Norte = Este
+siguiente Este = Sur
+siguiente Sur = Oeste
+siguiente Oeste = error"Oeste no tiene siguiente"
+
+data DiaDeSemana = Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo
+
+primeroYUltimoDia :: (DiaDeSemana, DiaDeSemana)
+primeroYUltimoDia = (Lunes, Domingo)
+
+empiezaConM :: DiaDeSemana -> Bool
+empiezaConM Martes = True
+empiezaConM Miercoles = True
+empiezaConM _ = False
+
+vieneDespues :: DiaDeSemana -> DiaDeSemana -> Bool
+vieneDespues d1 d2 = numeroDeDia d1 > numeroDeDia d2
+
+numeroDeDia :: DiaDeSemana -> Int
+numeroDeDia Lunes = 1
+numeroDeDia Martes = 2
+numeroDeDia Miercoles = 3
+numeroDeDia Jueves = 4
+numeroDeDia Viernes = 5
+numeroDeDia Sabado = 6
+numeroDeDia Domingo = 7
+
+estaEnElMedio :: DiaDeSemana -> Bool
+estaEnElMedio Jueves = True
+estaEnElMedio _ = False
+
+negar :: Bool -> Bool
+negar True = False
+negar False = True
+
+implica :: Bool -> Bool -> Bool
+implica True False = False
+implica _ _ = True
+
+yTambien :: Bool -> Bool -> Bool
+yTambien True True = True
+yTambien _ _ = False
+
+oBien :: Bool -> Bool -> Bool
+oBien True _ = True
+oBien _ b = b
+
+
+data Persona = P String Int
+
+nombre :: Persona -> String
+nombre (P n _) = n
+
+edad :: Persona -> Int
+edad (P _ e) = e
+
+crecer :: Persona -> Persona
+crecer (P n e) = P n (e+1)
+
+cambioDeNombre :: String -> Persona -> Persona
+cambioDeNombre s (P n e) = (P s e) 
+
+esMayorQueLaOtra :: Persona -> Persona -> Bool
+esMayorQueLaOtra p1 p2 = edad p1 > edad p2
+
+laQueEsMayor :: Persona -> Persona -> Persona
+laQueEsMayor p1 p2 = if esMayorQueLaOtra p1 p2
+			then p1
+			else p2
+
+data TipoDePokemon = Planta | Agua | Fuego
+data Pokemon = Pok TipoDePokemon  Int
+data Entrenador = Ent String Pokemon Pokemon
+
+superaA :: Pokemon -> Pokemon -> Bool
+superaA pok1 pok2 = esTipoSuperior (tipoPok pok1) (tipoPok pok2) 
+
+tipoPok :: Pokemon -> TipoDePokemon
+tipoPok (Pok t _) = t
+
+esTipoSuperior :: TipoDePokemon -> TipoDePokemon -> Bool
+esTipoSuperior Agua Fuego = True 
+esTipoSuperior Fuego Planta = True
+esTipoSuperior Planta Agua = True
+esTipoSuperior _ _ = False
+
+cantidadDePokemonDe :: TipoDePokemon -> Entrenador -> Int
+cantidadDePokemonDe t (Ent _ pok1 pok2) = unoSi (tieneMismoTipo t (tipoPok pok1)) + unoSi (tieneMismoTipo t (tipoPok pok2))
+
+tieneMismoTipo :: TipoDePokemon -> TipoDePokemon -> Bool
+tieneMismoTipo Fuego Fuego = True
+tieneMismoTipo Agua Agua = True
+tieneMismoTipo Planta Planta = True
+tieneMismoTipo _ _ = False
+
+unoSi :: Bool -> Int
+unoSi True = 1
+unoSi False = 0
+
+juntarPokemon :: (Entrenador, Entrenador) -> [Pokemon]
+juntarPokemon (ent1, ent2) = 
+
+loMismo :: a -> a
+loMismo x = x
+
+siempreSiete :: a -> Int
+siempreSiete x = 7
+
+swap :: (a,b) -> (b,a)
+swap (x,y) = (y,x)
+
+estaVacia :: [a] -> Bool
+estaVacia [] = True
+estaVacia _ = False
+
+elPrimero :: [a] -> a
+elPrimero [] = error"lista vacía"
+elPrimero (x:_) = x
+
+sinElPrimero :: [a] -> [a]
+sinElPrimero [] = [] 
+sinElPrimero (_:xs) = xs 
+
+splitHead :: [a] -> (a, [a])
+splitHead [] = error"lista vacía"
+splitHead (x:xs) = (x,xs)
+
+---------------------------------práctica 2
+/
+sumatoria :: [Int] -> Int
+sumatoria [] = 0
+sumatoria (n:ns) = n + sumatoria ns 
+
+/
+longitud :: [a] -> Int
+longitud [] = 0
+longitud (x:xs) = 1 + longitud xs
+
+/
+sucesores :: [Int] -> [Int]
+sucesores [] = []
+sucesores (n:ns) = n+1 : sucesores ns
+
+/
+conjuncion :: [Bool] -> Bool
+--da true si todos son true
+conjuncion [] = True
+conjuncion (b:bs) = b && conjuncion bs
+
+/
+disyuncion :: [Bool] -> Bool
+--da true si alguno es true
+disyuncion [] = False
+disyuncion (b:bs) = b || disyuncion bs
+
+/
+aplanar :: [[a]] -> [a]
+aplanar [] = []
+aplanar (xs:xss) = xs ++ aplanar xss
+
+/
+pertenece :: Eq a => a -> [a] -> Bool
+pertenece e [] = False
+pertenece e (x:xs) = esIgual e x || pertenece e xs
+
+/
+esIgual :: Eq a => a -> a -> Bool 
+esIgual e e = True
+esIgual _ _ = False
+
+/
+apariciones :: Eq a => a -> [a] -> Int
+apariciones e []  = 0
+apariciones e (x:xs) = unoSi (esIgual e x) + apariciones e xs
+
+/
+unoSi :: Bool -> Int
+unoSi True = 1
+unoSi False = 0
+
+/
+losMenoresA :: Int -> [Int] -> [Int]
+losMenoresA n [] = []
+losMenoresA n (x:xs) = if n > x 
+			then x : losMenoresA n xs
+			else losMenoresA n xs
+/
+lasDeLongitudMayorA :: Int -> [[a]] -> [[a]]
+lasDeLongitudMayorA n [] = []
+lasDeLongitudMayorA n (xs:xss) = if longitud xs > n 
+					then xs : lasDeLongitudMayorA n xss
+					else lasDeLongitudMayorA n xss
+/
+agregarAlFinal :: a -> [a] -> [a]
+agregarAlFinal e [] = [e]
+agregarAlFinal e (x:xs) = x : agregarAlFinal e xs 
+
+agregar :: [a] -> [a] -> [a]
+
+/
+reversa :: [a] -> [a]
+reversa [] = []
+reversa (x:xs) = agregarAlFinal x (reversa xs)
+
+zipMaximos :: [Int] -> [Int] -> [Int]
+
+/
+elMinimo :: Ord a => [a] -> a
+elMinimo [] = error"la lista está vacía"
+elMinimo [x] = x
+elMinimo (x:xs) = if x > elMinimo xs 
+			then elMinimo xs 
+			else x
+/
+factorial :: Int -> Int
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+
+cuentaRegresiva :: Int -> [Int]
+
+repetir :: Int -> a -> [a]
+
+/
+losPrimeros :: Int -> [a] -> [a]
+losPrimeros 0 _ = []
+losPrimeros n [] = []
+losPrimeros n (x:xs) = x : losPrimeros (n-1) xs
+
+sinLosPrimeros :: Int -> [a] -> [a]
+
+data Persona = P String Int
+
+/
+edad :: Persona -> Int
+edad (P _ e) = e
+
+/
+mayoresA :: Int -> [Persona] -> [Persona]
+mayoresA n [] = []
+mayoresA n (p:ps) = if edad p > n 
+			then p : mayoresA n ps 
+			else mayoresA n ps
+
+/
+promedioEdad :: [Persona] -> Int
+promedioEdad [] = error"la lista está vacía"
+promedioEdad (p:ps) = div (edad p + sumatoriaEdad ps) (1 + longitud ps)
+
+/
+sumatoriaEdad :: [Persona] -> Int
+sumatoriaEdad [] = 0
+sumatoriaEdad (p:ps) = edad p + sumatoriaEdad ps
+
+/
+elMasViejo :: [Persona] -> Persona
+elMasViejo [] = error"lista vacía"
+elMasViejo [p] = p
+elMasViejo (p:ps) = if edad p > edad (elMasViejo ps)
+			then p
+			else elMasViejo ps
+
+data TipoDePokemon = Agua | Fuego | Planta
+data Pokemon = ConsPokemon TipoDePokemon Int
+data Entrenador = ConsEntrenador String [Pokemon]
+
+cantPokemon :: Entrenador -> Int
+cantPokemon (ConsEntrenador _ poks) = longitud poks
+
+
+
+cantPokemonDe :: TipoDePokemon -> Entrenador -> Int
+cantPokemonDe t (ConsEntrenador _ poks) = cuantosSonDeTipo_En_ t poks
+
+cuantosSonDeTipo_En_ :: TipoDePokemon -> [Pokemon] -> Int
+cuantosSonDeTipo_En_ t [] = 0
+cuantosSonDeTipo_En_ t (pok:poks) = unoSi (esMismoTipo t (tipoPok pok)) + cuantosSonDeTipo_En_ t poks
+
+cuantosDeTipo_De_LeGananATodosLosDe_ :: TipoDePokemon -> Entrenador -> Entrenador -> Int
+
+esMaestroPokemon :: Entrenador -> Bool
+
+data Seniority = Junior | SemiSenior | Senior
+data Proyecto = ConsProyecto String
+data Rol = Developer Seniority Proyecto | Management Seniority Proyecto
+data Empresa = ConsEmpresa [Rol]
+
+proyectos :: Empresa -> [Proyecto]
+
+losDevSenior :: Empresa -> [Proyecto] -> Int
+
+cantQueTrabajanEn :: [Proyecto] -> Empresa -> Int
+
+asignadosPorProyecto :: Empresa -> [(Proyecto, Int)]
