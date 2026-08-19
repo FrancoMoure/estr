@@ -185,6 +185,44 @@ object gimenez{
 	}	
 }
 
+object gimenez {
+	method pagarSueldo(empleado){
+		fondo = fondo - empleado.sueldo()
+	}
+
+}
+object galvan{
+
+	var sueldo = 15000
+	method sueldo(){
+		return sueldo
+	}
+--no podria poner self.sueldo?? como el this en java?
+	method sueldo(_sueldo){
+		sueldo = _sueldo
+	}
+}
+
+object balgarria{
+var empanadasVendidas = 0
+
+	method sueldo(){
+		return self.empanadasVendidas() * self.precioEmpanadas()
+	}
+
+	method empanadasVendidas(){
+		return empanadasVendidas
+	}
+
+	method vender(empanadas){
+		empanadasVendidas = empanadasVendidas + empanadas
+	}
+
+	method precioEmpanadas(){
+		return 15
+	}
+}
+
 data Pokemon = (Pok tipo Int)
 
 data Entrenador Ent nom pok1 pok2
