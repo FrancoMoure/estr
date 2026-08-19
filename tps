@@ -181,13 +181,14 @@ object gimenez{
 	var fondo = 300000
 
 	method pagarSueldo(empleado){
-		fondo = fondo - empleado.getSueldo()
+		fondo = fondo - empleado.ggetSueldo()
 	}	
 }
 
 object gimenez {
 	method pagarSueldo(empleado){
 		fondo = fondo - empleado.sueldo()
+	empleado.cobrarSueldo()
 	}
 
 }
@@ -200,6 +201,14 @@ object galvan{
 --no podria poner self.sueldo?? como el this en java?
 	method sueldo(_sueldo){
 		sueldo = _sueldo
+	}
+	
+	method cobrarSueldo(
+		totalCobrado += self.sueldo()
+	)
+
+	method totalCobrado{
+		return totalCobrado
 	}
 }
 
@@ -221,7 +230,10 @@ var empanadasVendidas = 0
 	method precioEmpanadas(){
 		return 15
 	}
+method cobrarSueldo(){}
 }
+
+
 
 data Pokemon = (Pok tipo Int)
 
