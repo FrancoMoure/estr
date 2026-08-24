@@ -1,3 +1,89 @@
+EMPLEADOS:
+
+object jeanGray{
+
+	//const peso = 65
+	//aca no se si ponerlo en un metodo que me de su peso o en variable
+	
+	method getPeso(){
+		return 65
+	}
+
+	method puedeLlamar(){
+		return true
+	}	
+}
+
+object neo{
+	var credito = 0
+	method getPeso(){
+		return 0
+	}
+	
+	method tieneCredito(){
+		return credito > 0
+	}
+
+	method puedeLlamar(){
+		return self.tieneCredito()
+	}	
+}
+
+object saraConnor{
+	method puedeLlamar(){
+		return false	
+	}	
+}
+
+objeto paquete{
+	var peso = 0
+	var estaPago = 0
+
+	method getPrecioDeEnvioAl(lugar){
+		return lugar.precioDeEnvio()	
+	}
+
+	method pagarPaquete(){
+		estaPago = 1
+	}
+	
+	method estaPagado(){
+		return estaPago == 1
+	}
+
+	method getPeso(){
+		return peso
+	}	
+}
+
+objeto matrix{
+	method precioDeEnvio(){
+		return 500
+	}
+
+	dejarPasar(mensajero){
+		if mensajero.puedeLlamar()
+	}
+}
+
+objeto puenteDeBrooklyn{
+	method precioDeEnvio(){
+		return 150
+	}
+
+	method dejarPasar(paquete){
+		if paquete.estaPago && paquete.peso < 1000 
+			then 
+			else  
+	}
+
+}
+
+
+
+
+
+
 objeto manzana{
 	var gradoDeMadurez = 1
 	
