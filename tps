@@ -1,3 +1,187 @@
+object pepe {
+	var faltas = 0
+	var categoria = medioTiempo
+	var bonoPresentismoValor = normal
+	var bonoResultadosValor = montoFijo     
+
+    method categoria(_categoria){
+        categoria = _categoria
+    }
+
+    method sueldoNeto() {
+		return categoria.sueldoNeto()
+	}
+
+	method vecesQueFalto() {
+		return faltas
+	}
+
+	method hacerFaltar() {
+		faltas += 1
+	}
+
+	method sueldo() {
+		return self.sueldoNeto() + bonoPresentismoValor.valor() + bonoResultadosValor.valor()
+	}
+}
+
+
+object moria {
+	var categoria = vendedor
+	var bonoResultadosValor = montoFijo
+
+	method sueldo() {
+		return (categoria.sueldoNeto() * 1.3) + bonoResultadosValor.valor()
+	}
+}
+
+
+object ernesto {
+	var companiero = pepe
+
+	method sueldo() {
+		return companiero.sueldoNeto()
+	}
+
+	method cambiarCompaniero(_companiero) {
+		companiero = _companiero
+	}
+}
+
+
+object roque {
+	var bonoResultadosValor = montoFijo
+
+	method sueldoNeto() {
+		return 28000
+	}
+
+	method sueldo() {
+		return self.sueldoNeto() + bonoResultadosValor.valor() + 9000
+	}
+}
+
+
+object porcentaje{
+    method valor(empleado) {
+      return empleado.sueldoNeto() * 0.1
+    }
+}
+
+object montoFijo{
+	method valor(){
+        return 800
+    }
+}
+
+object nulo{
+	method valor(){
+        return 0
+    }
+}
+
+
+object normal{
+    method valor(empleado){
+		if (empleado.vecesQueFalto() == 0)
+			return 2000
+		else if (empleado.vecesQueFalto() == 1)
+			return 1000
+		else
+			return 0
+    }
+}
+
+object ajuste{
+	method valor(empleado){
+        if (empleado.vecesQueFalto() == 1)
+			return 100
+		else
+			return 0
+	}
+}
+
+object demagogico{
+    method valor(empleado){
+		if (empleado.sueldoNeto() < 18000)
+			return 500
+		else
+			return 300
+	}
+}
+
+
+
+
+object vendedor {
+	var aumentado = false
+
+	method activarAumentoPorMuchasVentas() {
+		aumentado = true
+	}
+
+	method desactivarAumentoPorMuchasVentas() {
+		aumentado = false
+	}
+
+	method sueldoNeto() {
+		if (aumentado)
+			return 16000 * 1.4
+		else
+			return 16000
+	}
+}
+
+
+object gerente {
+	method sueldoNeto() {
+		return 15000
+	}
+}
+
+
+object cadete {
+	method sueldoNeto() {
+		return 20000
+	}
+}
+
+
+object medioTiempo{
+	var categoriaBase = vendedor
+    
+    method sueldoNeto(){
+        categoriaBase.sueldoNeto() / 2
+    }
+    
+    method categoriaBase(_categoriaBase) {
+		categoriaBase = _categoriaBase
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 object pepe{
 	var faltas = 0
 	var categoria = vendedor
