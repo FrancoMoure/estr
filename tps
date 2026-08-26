@@ -1,4 +1,159 @@
 object pepe{
+	var faltas = 0
+	var categoria = vendedor
+	var bonoPresentismo = bonoPresentismo.normal(self)
+	var bonoResultados = bonoResultados.montoFijo()
+
+	method sueldoNeto(){
+		return categoria.sueldoNeto()
+	}
+
+	method vecesQueFalto(){
+		return faltas
+	}
+
+	method hacerFaltar(){
+		faltas += 1
+	}
+
+	method sueldo(){
+        self.sueldoNeto() + bonoPresentismo + bonoResultados
+	}
+}
+
+object moria{
+	var categoria = vendedor
+    var bonoResultados = bonoResultados.montoFijo()
+
+    method sueldo(){
+        return (categoria.sueldoNeto() * 1.3) + bonoResultados
+    }
+
+
+}
+
+object ernesto{
+		var campaniero = Pepe
+        
+        method sueldo(){
+            return campaniero.sueldoNeto()
+        }
+}
+
+object roque{
+		
+}
+
+object bonoResultados{
+	method porcentaje(empleado){
+		return empleado.sueldoNeto() * 0.1
+	}
+
+	method montoFijo(){
+		return 800
+	}
+	
+	method nulo(){
+		return 0
+	}
+
+}
+
+object bonoPresentismo{
+
+	method normal(empleado){
+		if empleado.vecesQueFalto() == 0
+			return 2000
+		else if empleado.vecesQueFalto() == 1 
+			return 1000
+		else return 0
+	}
+
+	method ajuste(empleado){
+		if empleado.vecesQueFalto() == 1
+			return 100
+		else return 0
+	}
+
+	method demagogico(empleado){
+		if empleado.sueldoNeto() < 18000
+			return 500
+		else return 300
+	}
+
+	method nulo(){
+		return 0
+	}
+}
+
+object vendedor{
+	
+	var aumentado = false
+
+	method activarAumentoPorMuchasVentas(){
+		aumentado = true	
+	}
+
+	method desactivarAumentoPorMuchasVentas(){
+		aumentado = false
+	}
+
+	method sueldoNeto(){
+		if aumentado 
+			return 16000 * 1.4
+			else return 16000
+	}
+}
+
+object gerente{
+	method sueldoNeto(){
+		return 15000
+	}	
+}
+
+object cadete{
+	method sueldoNeto(){
+		return 20000
+	}
+}
+
+object medioTiempo{
+	method categoriaBase(categoria){
+		return categoria.sueldoNeto() / 2
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+object pepe{
 	var vecesQueFalto = 0
 	var categoria = vendedor()
 	var bonoPresentismo = bonoPresentismo.normal(self)
