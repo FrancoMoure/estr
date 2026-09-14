@@ -1,3 +1,89 @@
+
+data Multiset a = 
+
+emptyMS :: MultiSet a 
+addMS :: Ord a => a -> MultiSet a -> MultiSet a 
+occurencesMS :: Ord a => a -> MultiSet a -> Int
+unionMS :: Ord a => MultiSet -> MultiSet a -> MultiSet a
+intersectMS :: Ord a => MultiSet a -> MultiSet a -> MultiSet a 
+ms2list :: Multiset a -> [(a,Int)]
+
+
+
+data Set a = S (Tree a)
+--inv.rep = en (S t), t cumple ser un bst
+
+emptyS :: Set a
+emptyS = S EmptyT
+
+addS :: Ord a => a -> Set a -> Set a
+belongs :: Ord a => a -> Set a -> Bool
+removeS :: Ord a => a -> Set a -> Set a
+set2list :: Ord a => Set a -> [a]
+
+set2list S t = inorder t
+
+inorder :: Tree a -> [a]
+inorder EmptyT = 
+
+object knightRider{
+	var nivelDePeligrosidad = 10
+	var 
+	
+	method nivelDePeligrosidad{
+		return nivelDePeligrosidad
+	}
+	
+}
+object arenaGranel{}
+object bumblebee{}
+object paqueteLadrillos{}
+object bateriaAntiaerea{}
+object residuosRadioactivos{}
+
+object camion{
+	var carga = []
+
+	method cargar(item){
+		//validacion acá primero
+		if not perteneceALista(item, carga){
+			carga.add(item)
+		}
+	}
+
+	method descargar(item){
+		validarDescargar(item)
+		//valido descargar el item con ese if, y dejo carga.remove(item)
+		if perteneceALista(item, carga){
+			carga.remove(item)
+		}else{
+			self.error("")
+		}
+		
+	}
+
+	method todoPesoPar(){
+		return carga.all({item => esPar(item)})
+	}
+
+	method hayAlgunoQuePesa(peso){
+		return carga.any
+	}
+
+	method pesoTotal(){
+		return 1000 + carga.sum(peso de los items)
+	}
+
+	method excesoDePeso(){
+		return self.pesoTotal() > 2500
+	}
+
+	method elDeNivel(nivel){
+		return carga.filter(nivelDePeligrosidad == nivel)
+	}
+}
+
+
 data Queue a = Q [a] Int
 
 emptyQ :: Queue q
