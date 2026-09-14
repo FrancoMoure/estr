@@ -1,3 +1,107 @@
+data Queue a = Q [a] Int
+
+emptyQ :: Queue q
+isEmptyQ :: Queue a -> Bool
+enqueue :: a -> Queue a -> Queue a
+firstQ :: Queue a -> a
+dequeue :: Queue a -> Queue a
+lenQ :: Queue a -> Int
+
+emptyQ = Q [] 0                           O(1)
+isEmptyQ (Q _ n) = n==0                   O(1)
+enqueue x (Q xs n) = Q (xs++[x]) (n+1)    O(n)
+lenQ (Q _ n) = n                          O(1) 
+--valido gracias al invariante de representacion
+firstQ (Q xs _) = head xs   		  O(1)
+dequeue (Q xs n) = Q (tail xs) (n-1)   	  O(1)
+
+
+data Set a = Set [a] Int
+--xs no tiene repetidos
+n es la longitud de la lista
+
+emptyS 		   = Set [] 0			O(1)
+addS x (Set xs)    = Set (x:xs) (verSiAumenta n x xs)     		O(n)
+belongs x (Set xs) = x elem xs			O(n)
+unionS (Set xs) (Set ys) = Set (xs++ys)		O(n)
+lenS (Set xs n) 	   = n			O(1)
+set2List (Set xs)  = xs				O(1)
+
+verSiAumenta :: Int -> a -> [a] -> Int
+
+data PriorityQueue a =
+
+emptyPQ :: PriorityQueue a 
+isEmptyQ :: PriorityQueue a -> Bool
+insertPQ :: Ord a => a -> PriorityQueue a -> PriorityQueue a 
+findMinPQ :: Ord a => PriorityQueue a -> a
+deleteMinPQ :: Ord a => PriorityQueue a -> PriorityQueue a
+
+emptyPQ = PQ []               			O(1)
+isEmptyPQ (PQ xs) = null xs			O(1)
+insertPQ x (PQ xs) = PQ (x:xs)  		O(1)
+findMinPQ (PQ xs) = minimum xs  		O(n)
+deleteMinPQ (PQ xs) = PQ (borrarMin xs) 	O(n)
+
+borrarMin :: Ord a => [a] -> [a]
+--prec: la lista no es vacía
+borrarMin [x] = []
+borrarMin xs = borrar (minimum xs) xs
+
+--O(n)
+borrar :: Eq a => a -> [a] -> [a]
+borrar x [] = []
+borrar x (y:ys) = if x==y then ys else y : borrar x ys
+
+
+
+data Map k v = 
+
+emptyM :: Map k v
+assocM :: Eq k => k -> v -> Map k v -> Map k v 
+lookupM :: Eq k => k -> Map k v -> Maybe v
+deleteM :: Eq k => k -> Map k v -> Map k v
+keys :: Eq k => Map k v -> [k]
+
+emptyM = M []
+assocM k v (M kvs) = M (asociar k v kvs)
+lookupM k (M kvs) = buscar k kvs
+deleteM =  M (borrar k kvs)
+domM = claves kvs
+
+--O(n)
+buscar :: Eq k => k -> [(k,v)] -> Maybe v
+buscar k [] = Nothing
+buscar k ((k',v'):kvs) = if k==k' then Just v' else buscar k kvs
+
+--O(n)
+claves :: [(k,v)] -> [k]
+claves [] = []
+claves ((k,v),kvs) = k : claves kvs 
+
+--O(n)
+asociar :: k -> v -> [(k,v)] -> [(k,v)]
+asociar k v [] = [(k,v)]
+asociar k v ((k'v'),kvs) = if k==k' then (k',v):kvs else (k',v') : asociar k v kvs 
+
+--O(n)
+borrar :: Eq k => k -> [(k,v)] -> [(k,v)]
+borrar k [] = []
+borrar k ((k',v'),kvs) = if k==k' then kvs else (k',v') : borrar k kvs
+
+
+data Multiset a = 
+
+emptyMS :: MultiSet a 
+addMS :: Ord a => a -> MultiSet a -> MultiSet a 
+occurencesMS :: Ord a => a -> MultiSet a -> Int
+unionMS :: Ord a => MultiSet -> MultiSet a -> MultiSet a
+intersectMS :: Ord a => MultiSet a -> MultiSet a -> MultiSet a 
+ms2list :: Multiset a -> [(a,Int)]
+
+
+
+
 --constante
 head :: [a] -> a
 head (x:xs) = x
